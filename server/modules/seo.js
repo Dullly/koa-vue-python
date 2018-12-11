@@ -49,7 +49,6 @@ class SeoModel {
 	 */
 	static async MfindKeyIndex (KeyLists) {
 		const result = await bpsoDb.findAll({
-			attributes: ['KeyName','DayPv'],
 			where: {
 				KeyName: {[Op.in]: KeyLists},
 			}

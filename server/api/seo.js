@@ -43,7 +43,7 @@ class seoController {
      */
     static async MfindKeyIndex(ctx) {
         let KeyLists = ctx.request.query['KeyLists'];
-
+        KeyLists = JSON.parse(KeyLists);
         if (KeyLists) {
             try {
                 // 查询
@@ -66,7 +66,6 @@ class seoController {
             ctx.response.status = 416;
             ctx.body = {
                 code: 416,
-                result: KeyName,
                 msg: '其他错误'
             }
         }

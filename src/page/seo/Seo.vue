@@ -291,9 +291,20 @@
 				return '';
 			},
 			getData() {
-				this.$ajax.get('/api/seo',{
+				// this.$ajax.get('/api/seo/findByKeyName',{
+				// 	params:{
+				// 		KeyName: '梦工厂',
+				// 	}
+				// })
+				// .then(function (response) {
+				// 	console.log(response)
+				// })
+				// .catch(function (error) {
+				// 	console.log(error)
+				// });
+				this.$ajax.get('/api/seo/MfindKeyIndex',{
 					params:{
-						KeyName: '梦工厂',
+						KeyLists: JSON.stringify(["梦工厂","qq飞车"]),
 					}
 				})
 				.then(function (response) {
