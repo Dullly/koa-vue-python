@@ -1,4 +1,4 @@
-# [vue-scscmsV2.0 <sup>webpack V4版</sup>](https://github.com/Dullly/koa-vue-python)
+# [koa2+vue+mysql+python <sup>练习版</sup>](https://github.com/Dullly/koa-vue-python)
 
 [![](https://img.shields.io/badge/Powered%20by-vue-brightgreen.svg)](https://github.com/Dullly/koa-vue-python)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Dullly/koa-vue-python)
