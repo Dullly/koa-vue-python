@@ -1,0 +1,38 @@
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0}
+body{font:12px "宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%}
+a{color:#172c45;text-decoration:none}
+a:hover{color:#cd0200;text-decoration:underline}
+em{font-style:normal}
+li{list-style:none}
+img{border:0;vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0}
+p{word-wrap:break-word}
+
+
+body{
+    background-color: #f3f3f3;
+    font: 12px "Helvetica Neue",Helvetica,STHeiTi,sans-serif;
+}
+
+/* 公共global */
+[class^="page-main-"]{
+    .el-header{
+        background-color: #222;
+        padding: 0;
+        h1{
+            color: #fff;
+            font-size: 24px;
+            font-weight: normal;
+            padding: 12px 20px;
+            background-color: rgba(0,0,0,.5);
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            -webkit-user-select: none;
+            -webkit-text-size-adjust: 100%;
+        }
+    }
+    .mod{
+        h3{
+            font-size: 18px;
+        }
+    }
+}
