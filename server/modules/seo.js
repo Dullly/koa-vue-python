@@ -12,17 +12,30 @@ const bpsoDb = mercuryDb.import('../schema/bpso.js'); // 用sequelize的import�
 import Seqeuelize from 'sequelize';
 const Op = Seqeuelize.Op;
 
+// S前缀代表单查询，M前缀代表多查询
 class SeoModel {
 	/**
-	 * 查询用户信息
+	 * 单查询，seo的相关信息
 	 * @param KeyName  关键词
 	 * @returns {Promise.<*>}
 	 */
-	static async findByKeyName (keyName) {
-		console.log(keyName)
+	static async SfindSeoKey (keyName) {
 		const result = await seoDb.findAll({
 			where: {
 				KeyName: keyName
+			}
+		})
+		return result
+	}
+	/**
+	 * 单查询，seo的相关信息
+	 * @param KeyName  关键词
+	 * @returns {Promise.<*>}
+	 */
+	static async MfindSeoKey (KeyLists) {
+		const result = await seoDb.findAll({
+			where: {
+				KeyName: {[Op.in]: KeyLists},
 			}
 		})
 		return result
@@ -32,14 +45,21 @@ class SeoModel {
 	 * @param KeyName  关键词
 	 * @returns {Promise.<*>}
 	 */
-	static async SfindKeyIndex (keyName) {
-		const result = await bpsoDb.findAll({
-			attributes: ['KeyName','DayPv'],
-			where: {
-				KeyName: keyName,
-				KeyWords: keyName
-			}
-		})
+	static async SfindBpsoKey (keyName, islimit=true) {
+		if(islimit){
+			const result = await bpsoDb.findAll({
+				where: {
+					KeyName: keyName,
+					KeyWords: keyName
+				}
+			})
+		}else{
+			const result = await bpsoDb.findAll({
+				where: {
+					KeyName: keyName,
+				}
+			})
+		}
 		return result
 	}
 	/**
@@ -47,12 +67,22 @@ class SeoModel {
 	 * @param KeyLists  关键词数组
 	 * @returns {Promise.<*>}
 	 */
-	static async MfindKeyIndex (KeyLists) {
-		const result = await bpsoDb.findAll({
-			where: {
-				KeyName: {[Op.in]: KeyLists},
-			}
-		})
+	static async MfindBpsoKey (KeyLists, islimit=true) {
+		var result;
+		if(islimit){
+			result = await bpsoDb.findAll({
+				where: {
+					KeyName: {[Op.in]: KeyLists},
+					KeyWords: {[Op.in]: KeyLists},
+				}
+			})
+		}else{
+			result = await bpsoDb.findAll({
+				where: {
+					KeyName: {[Op.in]: KeyLists},
+				}
+			})
+		}
 		return result
 	}
 	

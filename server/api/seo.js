@@ -47,7 +47,7 @@ class seoController {
         if (KeyLists) {
             try {
                 // 查询
-                let data = await SeoModel.MfindKeyIndex(KeyLists);
+                let data = await SeoModel.MfindBpsoKey(KeyLists);
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
