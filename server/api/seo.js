@@ -60,14 +60,8 @@ class seoController {
                 // 查询百度竞价相关信息，拿到关键词数组信息
                 // let seoData = await SeoModel.MfindSeoKey(KeyLists);
                 
-                var getNewsParams = {
-                    "keylist":["绝地求生","绝地求生超级助手","绝地求生视频","pc版绝地求生","绝地求生吧","绝地求生刺激战场下载","绝地求生最欠揍的名字","绝地求生下载","绝地求生刺激战场","绝地求生全军出击","绝地求生国服","绝地求生 刺激战场","绝地求生直播","虎扑绝地求生"],
-                    "num": 5
-                }
-                getNewsParams = JSON.stringify(getNewsParams)
-                console.log(getNewsParams)
-                console.log(Object.prototype.toString.call(getNewsParams))
-                PythonShell.PythonShell("getNews.py",getNewsParams)
+                var getNewsParams = ["绝地求生","绝地求生超级助手","绝地求生视频","pc版绝地求生","绝地求生吧","绝地求生刺激战场下载","绝地求生最欠揍的名字","绝地求生下载","绝地求生刺激战场","绝地求生全军出击","绝地求生国服","绝地求生 刺激战场","绝地求生直播","虎扑绝地求生"]
+                PythonShell.PythonShell("getNews.py",[getNewsParams,1])
 
 
                 ctx.response.status = 200;

@@ -4,9 +4,9 @@ const Exec = require('child_process').exec
 
 class PythonShell {
     static async PythonShell(api,args){
-        arg = " -p ";
+        var arg = " -p ";
         args.forEach(ele => {
-            arg += JSON.stringify(ele)
+            arg +=" " + JSON.stringify(ele)
         });
         console.log(arg)
         Exec("python3 server/python/"+api+arg, function(err,stdout,stderr){
@@ -19,6 +19,5 @@ class PythonShell {
     }
 
 }
-
 
 module.exports = PythonShell
