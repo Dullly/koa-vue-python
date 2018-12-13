@@ -1,11 +1,19 @@
 // 后台路由配置
 const Router = require('koa-router')
 const router = new Router()
-const SeoController = require('./api/seo')
+
+const getKeyIndex = require('./api/getKeyIndex')
+const getKeyLong = require('./api/getKeyLong')
+const getNews = require('./api/getNews')
+const getParticiple = require('./api/getParticiple')
 
 
-// 获取文章详情接口（路由）
-router.get('/api/seo/findByKeyName', SeoController.findByKeyName)
-router.get('/api/seo/MfindKeyIndex', SeoController.MfindKeyIndex)
+// 指数查询
+router.get('/api/seo/getKeyIndex', getKeyIndex.findKeyIndex)
+// 长尾词查询
+router.get('/api/seo/getKeyLong', getKeyLong.findKeyLong)
+// 分词查询
+router.get('/api/seo/getParticiple', getParticiple.findParticiple)
+router.get('/api/seo/getNews', getNews.findNews)
 
 module.exports = router

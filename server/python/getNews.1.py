@@ -60,7 +60,10 @@ def _SingleGetNews(key, limitNum):
 def _clean(str):
 	return str.replace('\\n', '').strip()
 
-def search(longKeyList,limitNum):
+def search(args):
+	params = getArgs.getArgs(args)
+	longKeyList = json.loads(params[0])
+	limitNum = int(params[1])
 
 	NEWS = []
 	# 多线程
@@ -79,4 +82,8 @@ def search(longKeyList,limitNum):
 		newsAndQa = thrs[index].getResult()
 		NEWS = NEWS + newsAndQa
 		
-	return NEWS
+	print(json.dumps(NEWS,ensure_ascii=False))
+	# 缓冲区，用于多线程调用返回
+    # sys.stdout.flush()
+
+search(sys.argv)

@@ -1,5 +1,6 @@
 import threading,time
- 
+import traceback
+
 # MyThread.py线程类
 class MyThread(threading.Thread):
     def __init__(self, func, args=()):
@@ -8,12 +9,11 @@ class MyThread(threading.Thread):
         self.args = args
  
     def run(self):
-        time.sleep(0.2)
         self.result = self.func(*self.args)
  
-    def get_result(self):
+    def getResult(self):
         threading.Thread.join(self) # 等待线程执行完毕
         try:
             return self.result
-        except Exception:
-            return None
+        except Exception as e:
+            return traceback.format_exc()

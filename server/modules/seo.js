@@ -41,20 +41,21 @@ class SeoModel {
 		return result
 	}
 	/**
-	 * 查询用户信息，单查询
+	 * 查询百度竞价信息，单查询
 	 * @param KeyName  关键词
 	 * @returns {Promise.<*>}
 	 */
 	static async SfindBpsoKey (keyName, islimit=true) {
+		var result;
 		if(islimit){
-			const result = await bpsoDb.findAll({
+			result = await bpsoDb.findAll({
 				where: {
 					KeyName: keyName,
 					KeyWords: keyName
 				}
 			})
 		}else{
-			const result = await bpsoDb.findAll({
+			result = await bpsoDb.findAll({
 				where: {
 					KeyName: keyName,
 				}
@@ -63,23 +64,23 @@ class SeoModel {
 		return result
 	}
 	/**
-	 * 查询用户信息，多查询
-	 * @param KeyLists  关键词数组
+	 * 查询百度竞价信息，多查询
+	 * @param KeyList  关键词数组
 	 * @returns {Promise.<*>}
 	 */
-	static async MfindBpsoKey (KeyLists, islimit=true) {
+	static async MfindBpsoKey (KeyList, islimit=true) {
 		var result;
 		if(islimit){
 			result = await bpsoDb.findAll({
 				where: {
-					KeyName: {[Op.in]: KeyLists},
-					KeyWords: {[Op.in]: KeyLists},
+					KeyName: {[Op.in]: KeyList},
+					KeyWords: {[Op.in]: KeyList},
 				}
 			})
 		}else{
 			result = await bpsoDb.findAll({
 				where: {
-					KeyName: {[Op.in]: KeyLists},
+					KeyName: {[Op.in]: KeyList},
 				}
 			})
 		}

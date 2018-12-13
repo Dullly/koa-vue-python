@@ -291,7 +291,7 @@
 				return '';
 			},
 			getData() {
-				// this.$ajax.get('/api/seo/findByKeyName',{
+				// this.$ajax.get('/api/seo/getKeyIndex',{
 				// 	params:{
 				// 		KeyName: '梦工厂',
 				// 	}
@@ -302,9 +302,27 @@
 				// .catch(function (error) {
 				// 	console.log(error)
 				// });
-				this.$ajax.get('/api/seo/MfindKeyIndex',{
+				// this.$ajax.get('/api/seo/getParticiple',{
+				// 	// params:{
+				// 	// 	KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
+				// 	// }
+				// 	params:{
+				// 		KeyName: '梦工厂',
+				// 	}
+				// })
+				// .then(function (response) {
+				// 	console.log(response)
+				// })
+				// .catch(function (error) {
+				// 	console.log(error)
+				// })
+				this.$ajax.get('/api/seo/getNews',{
+					// params:{
+					// 	KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
+					// }
 					params:{
-						KeyLists: JSON.stringify(["梦工厂","qq飞车"]),
+						KeyName: '梦工厂',
+						num: 5
 					}
 				})
 				.then(function (response) {
