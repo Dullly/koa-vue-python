@@ -10,8 +10,11 @@
 
 
 前端基于Vue
+
 数据库基于Mysql
+
 后台基于koa2+sanic
+
 + `koa2`用于整体数据交互
 + `sanic`是一个超高效、快速的python服务端，用于执行python脚本，返回数据
 
