@@ -2,6 +2,8 @@ const SeoModel = require('../../modules/seo')
 //node调用pyhon
 const PythonShell = require('../../python/index')
 
+const axios = require('axios');
+
 class getNews {
     /**
      * 获取分词
@@ -16,10 +18,23 @@ class getNews {
         if(ctx.request.query['KeyName']){
             let KeyName = JSON.stringify([ctx.request.query['KeyName']]);
 
-            result = await PythonShell.PythonShell("getNews.py",[KeyName,num])
-            result = result.replace(/\n[\s| | ]*\r/g,'\n');
-            console.log("----------------------")
-            console.log(result)
+            // result = await PythonShell.PythonShell("getNews.py",[KeyName,num])
+            // result = result.replace(/\n[\s| | ]*\r/g,'\n');
+            // console.log("----------------------")
+            // console.log(result)
+            axios.get('http://10.19.88.63:3002/getNews',{
+                params:{
+                    KeyList: JSON.stringify(['梦工厂']),
+                    num: num
+                }
+            })
+            .then(response => {
+                console.log(response.data.url);
+                console.log(response.data.explanation);
+            })
+            .catch(error => {
+                console.log(error);
+            });
 
             return result;
         }

@@ -3,6 +3,9 @@
 # @Author   : Corkyliu
 # @Desc		: 此方法用于返回问答、新闻
 # @Param	: longKeyList: Array 批量查询新闻； 
+from sanic.response import json as sanjson
+from sanic import Blueprint
+bpGetNews = Blueprint('getNews')
 
 import requests
 import sys
@@ -60,7 +63,7 @@ def _SingleGetNews(key, limitNum):
 def _clean(str):
 	return str.replace('\\n', '').strip()
 
-def search(longKeyList,limitNum):
+def _search(longKeyList,limitNum):
 
 	NEWS = []
 	# 多线程
@@ -80,3 +83,14 @@ def search(longKeyList,limitNum):
 		NEWS = NEWS + newsAndQa
 		
 	return NEWS
+
+@bpGetNews.route('/getNews')
+async def bpGetNews_root(request):
+	request = request.args
+	print(KeyList)
+	print(type(KeyList))
+	KeyList = json.loads(request["KeyList"])
+	num = int(request["num"])
+	print(num)
+	news = _search(KeyList,num)
+	return sanjson(news)
