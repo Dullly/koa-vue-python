@@ -24,7 +24,6 @@ Global_Heads = {
 	'User-Agent': 'Mozilla/6.1 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
 }
 
-# 将父级目录加入库，好引用Lib下的文件
 sys.path.append(os.getcwd()+"/lib/")
 # 引入多线程脚本
 from lib import threadClass
@@ -87,10 +86,7 @@ def _search(longKeyList,limitNum):
 @bpGetNews.route('/getNews')
 async def bpGetNews_root(request):
 	request = request.args
-	print(KeyList)
-	print(type(KeyList))
-	KeyList = json.loads(request["KeyList"])
-	num = int(request["num"])
-	print(num)
+	KeyList = json.loads(request["KeyList"][0])
+	num = int(request["num"][0])
 	news = _search(KeyList,num)
 	return sanjson(news)

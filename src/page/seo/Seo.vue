@@ -5,7 +5,7 @@
 			<!-- 搜索框 -->
 			<div class="search-wrap">
 				<el-input placeholder="请输入url" prefix-icon="el-icon-search"></el-input>
-				<el-button type="primary">立即分析</el-button>
+				<el-button type="primary" @click="getData">立即分析</el-button>
 			</div>
 			<div class="search-state">
 				<p>aaaa</p>
@@ -317,13 +317,14 @@
 				// 	console.log(error)
 				// })
 				this.$ajax.get('/api/seo/getNews',{
-					// params:{
-					// 	KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
-					// }
 					params:{
-						KeyName: '梦工厂',
-						num: 5
+						KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
+						num: 10
 					}
+					// params:{
+					// 	KeyName: '梦工厂',
+					// 	num: 10
+					// }
 				})
 				.then(function (response) {
 					console.log(response)

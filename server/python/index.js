@@ -31,8 +31,6 @@ class PythonShell {
                     console.log('获取python参数错误:'+stderr);
                     reject(new Error('获取python参数错误:'+stderr))
                 } else {
-                    console.log("=========");
-                    console.log(stdout);
                     resolve(stdout)
                 }
             });

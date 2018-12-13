@@ -24,16 +24,16 @@ class getNews {
 			else{
 				KeyList = ctx.request.query['KeyList'];
 			}
-            result = await axios.get('http://0.0.0.0:3002/getNews',{
+            result = await axios.get('http://0.0.0.0:3002/getQa',{
                 params:{
                     KeyList: KeyList,
                     num: num
                 }
-			})
-			result = result.data
-			return new Promise((resolve) => {
-				resolve(result)
-			})
+            })
+            result = result.data
+            return new Promise((resolve) => {
+                resolve(result)
+            })
         }
         else{
             return false;
