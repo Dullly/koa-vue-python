@@ -1,8 +1,5 @@
-const SeoModel = require('../../modules/seo')
-//node调用pyhon
-const PythonShell = require('../../python/index')
-
-const axios = require('axios');
+// 异步请求
+const $ajax = require('../Global/js/axios');
 
 class getNews {
     /**
@@ -17,23 +14,22 @@ class getNews {
         // 如果是KeyName，则为单查询
         // 如果是KeyList，则为批量查询
         if(ctx.request.query['KeyName'] || ctx.request.query['KeyList']){
-			let KeyList;
+            let KeyList;
+            // 单查询，将keyName封装为数组
 			if(ctx.request.query['KeyName']){
 				KeyList = JSON.stringify([ctx.request.query['KeyName']]);
-			}
+            }
+            // 多查询
 			else{
 				KeyList = ctx.request.query['KeyList'];
-			}
-            result = await axios.get('http://127.0.0.1:3002/getNews',{
-                params:{
-                    KeyList: KeyList,
-                    num: num
-                }
-			})
-			result = result.data
-			return new Promise((resolve) => {
-				resolve(result)
-			})
+            }
+            // 调用python接口
+            let params = {
+                KeyList: KeyList,
+                num: num
+            }
+            result = await $ajax.get("getQa",params);
+            return result;
         }
         else{
             return false;

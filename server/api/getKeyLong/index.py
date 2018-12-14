@@ -3,8 +3,11 @@
 # @Author   : Corkyliu
 # @Desc		: 此方法用于返回问答、新闻
 # @Param	: longKeyList: Array 批量查询新闻； 
+
+# 创建sanic蓝图
 from sanic.response import json as sanjson
 from sanic import Blueprint
+# 导出引用关键词
 bpGetNews = Blueprint('getNews')
 
 import requests
@@ -24,11 +27,8 @@ Global_Heads = {
 	'User-Agent': 'Mozilla/6.1 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
 }
 
-sys.path.append(os.getcwd()+"/lib/")
 # 引入多线程脚本
-from lib import threadClass
-from lib import getArgs
-
+from ..Global.python.lib import threadClass
 
 def _MultiGetKey(keyList,limitNum):
 	res = []
@@ -83,7 +83,7 @@ def _search(longKeyList,limitNum):
 		
 	return NEWS
 
-@bpGetNews.route('/getNews')
+@bpGetNews.route('/python/getNews')
 async def bpGetNews_root(request):
 	request = request.args
 	KeyList = json.loads(request["KeyList"][0])

@@ -3,8 +3,11 @@
 # @Author   : Corkyliu
 # @Desc		: 此方法用于返回问答、新闻
 # @Param	: longKeyList: Array 批量查询新闻； 
+
+# 创建sanic蓝图
 from sanic.response import json as sanjson
 from sanic import Blueprint
+# 导出引用关键词
 bpGetNews = Blueprint('getNews')
 
 import requests
@@ -24,11 +27,8 @@ Global_Heads = {
 	'User-Agent': 'Mozilla/6.1 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
 }
 
-sys.path.append(os.getcwd()+"/lib/")
 # 引入多线程脚本
-from lib import threadClass
-from lib import getArgs
-
+from ..Global.python.lib import threadClass
 
 def _MultiGetKey(keyList,limitNum):
 	res = []
@@ -63,7 +63,6 @@ def _clean(str):
 	return str.replace('\\n', '').strip()
 
 def _search(longKeyList,limitNum):
-
 	NEWS = []
 	# 多线程
 	threadList = []
@@ -80,14 +79,32 @@ def _search(longKeyList,limitNum):
 	for index in range(len(thrs)):
 		newsAndQa = thrs[index].getResult()
 		NEWS = NEWS + newsAndQa
-		
 	return NEWS
 
-@bpGetNews.route('/getNews')
+# 做一层code中转，这样前端可以直接调python接口，不用经过Node层，直接拿到数据
+def main(KeyList,num):
+	try:
+		news = _search(KeyList,num)
+		result = {
+			"code": 200,
+			"msg": "success",
+			"result": news
+		}
+	except:
+		result = {
+			"code": 412,
+			"msg": "爬虫错误",
+		}
+	return result
+
+# 后台route
+@bpGetNews.route('/python/getNews')
 async def bpGetNews_root(request):
+	# 分解参数
 	request = request.args
 	KeyList = json.loads(request["KeyList"][0])
 	num = int(request["num"][0])
-	print(KeyList)
-	news = _search(KeyList,num)
-	return sanjson(news)
+	
+	result = main(KeyList,num)
+	
+	return sanjson(result)

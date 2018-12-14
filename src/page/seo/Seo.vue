@@ -316,15 +316,14 @@
 				// .catch(function (error) {
 				// 	console.log(error)
 				// })
-				this.$ajax.get('/api/seo/getNews',{
-					params:{
+				this.$ajax({
+					method: 'GET',
+					url: '/api/getNews',
+                    dataType: 'json',
+					params: {
 						KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
 						num: 10
 					}
-					// params:{
-					// 	KeyName: '梦工厂',
-					// 	num: 10
-					// }
 				})
 				.then(function (response) {
 					console.log(response)
