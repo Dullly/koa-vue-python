@@ -302,26 +302,12 @@
 				// .catch(function (error) {
 				// 	console.log(error)
 				// });
-				// this.$ajax.get('/api/seo/getParticiple',{
-				// 	// params:{
-				// 	// 	KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
-				// 	// }
-				// 	params:{
-				// 		KeyName: '梦工厂',
-				// 	}
-				// })
-				// .then(function (response) {
-				// 	console.log(response)
-				// })
-				// .catch(function (error) {
-				// 	console.log(error)
-				// })
 				this.$ajax({
 					method: 'GET',
-					url: '/api/getNews',
+					url: '/api/getKeyIndex',
                     dataType: 'json',
 					params: {
-						KeyList: JSON.stringify(["梦工厂","QQ飞车"]),
+						KeyList: JSON.stringify(["王者荣耀","星之守护"]),
 						num: 10
 					}
 				})
@@ -331,6 +317,20 @@
 				.catch(function (error) {
 					console.log(error)
 				})
+				// this.$ajax({
+				// 	method: 'POST',
+				// 	url: '/api/getParticiple',
+                //     dataType: 'json',
+				// 	data: {
+				// 		KeyList: JSON.stringify(["魔法少女 星之守护者- 英雄联盟官方网站 - 腾讯游戏","上海东方梦工厂影视技术有限公司怎么样？"]),
+				// 	}
+				// })
+				// .then(function (response) {
+				// 	console.log(response)
+				// })
+				// .catch(function (error) {
+				// 	console.log(error)
+				// })
 			}
 
 		},

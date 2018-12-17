@@ -1,14 +1,14 @@
-const GetQa = require('./base/getQa')
+const main = require('./main')
 
-class getQa {
+class getKeyIndex {
     /**
      * 按关键词获取数据
      * @param ctx
      * @returns {Promise.<void>}
      */
-    static async findNews(ctx) {
+    static async find(ctx) {
         try {
-            let result = await GetQa.find(ctx)
+            let result = await main.find(ctx)
             if(result){
                 ctx.response.status = 200;
                 ctx.body = {
@@ -36,4 +36,4 @@ class getQa {
     }
 }
 
-module.exports = getQa
+module.exports = getKeyIndex

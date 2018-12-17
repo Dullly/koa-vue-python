@@ -47,9 +47,9 @@ def _search(KeyList):
     return res
 
 
-@bpGetParticiple.route('/python/getParticiple')
+@bpGetParticiple.route('/python/getParticiple',methods=['POST'])
 async def bpGetParticiple_root(request):
-	request = request.args
-	KeyList = json.loads(request["KeyList"][0])
+	request = request.json
+	KeyList = json.loads(request["KeyList"])
 	res = _search(KeyList)
 	return sanjson(res)

@@ -1,10 +1,9 @@
+// 异步请求
 const SeoModel = require('../../modules/seo')
-//node调用pyhon
-const PythonShell = require('../../python/index')
 
-class getParticiple {
+class getKeyIndex {
     /**
-     * 获取分词
+     * 根据关键词，查询百度竞价数据库
      * @param ctx
      * @returns {Promise.<void>}
      */
@@ -14,11 +13,8 @@ class getParticiple {
         // 如果是KeyName，则为单查询
         if(ctx.request.query['KeyName']){
             let KeyName = ctx.request.query['KeyName'];
-            let num = ctx.request.query['num']?ctx.request.query['num']:20;
-
-            let news = PythonShell.PythonShell("getNews.py",[KeyName,num])
-            // console.log(news)
-
+            // 单查询
+            result = await SeoModel.SfindBpsoKey(KeyName);
             return result;
         }
         // 如果是KeyList，则为批量查询
@@ -35,4 +31,4 @@ class getParticiple {
     }
 }
 
-module.exports = getParticiple
+module.exports = getKeyIndex

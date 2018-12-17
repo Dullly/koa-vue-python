@@ -1,6 +1,6 @@
 const main = require('./main')
 
-class getNews {
+class getKeyLong {
     /**
      * 按关键词获取数据
      * @param ctx
@@ -36,4 +36,4 @@ class getNews {
     }
 }
 
-module.exports = getNews
+module.exports = getKeyLong

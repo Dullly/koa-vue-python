@@ -104,7 +104,6 @@ async def bpGetNews_root(request):
 	request = request.args
 	KeyList = json.loads(request["KeyList"][0])
 	num = int(request["num"][0])
-	
 	result = main(KeyList,num)
 	
 	return sanjson(result)

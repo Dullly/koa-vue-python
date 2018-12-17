@@ -1,40 +1,47 @@
 // 异步请求
-const $ajax = require('../Global/js/axios');
+const SeoModel = require('../../modules/seo')
 
-class getNews {
+class getKeyLong {
     /**
-     * 获取分词
+     * 获取长尾词
      * @param ctx
      * @returns {Promise.<void>}
      */
     static async find(ctx) {
-        let result,
-            num = ctx.request.query['num']?ctx.request.query['num']:20;
+        var result;
 
         // 如果是KeyName，则为单查询
+        if(ctx.request.query['KeyName']){
+            // 逻辑暂时没写
+            return false;
+        }
         // 如果是KeyList，则为批量查询
-        if(ctx.request.query['KeyName'] || ctx.request.query['KeyList']){
-            let KeyList;
-            // 单查询，将keyName封装为数组
-			if(ctx.request.query['KeyName']){
-				KeyList = JSON.stringify([ctx.request.query['KeyName']]);
-            }
-            // 多查询
-			else{
-				KeyList = ctx.request.query['KeyList'];
-            }
-            // 调用python接口
-            let params = {
-                KeyList: KeyList,
-                num: num
-            }
-            result = await $ajax.get("getNews",params);
-            return result;
+        else if(ctx.request.query['KeyList']){
+            let KeyList = ctx.request.query['KeyList'];
+            KeyList = JSON.parse(KeyList);
+            
+            // 查询百度竞价相关信息，拿到关键词数组信息
+            let bpsoData = await SeoModel.MfindBpsoKey(KeyList,false);
+            // 查询百度竞价相关信息，拿到关键词数组信息
+            let seoData = await SeoModel.MfindSeoKey(KeyList);
+            
+            // 取长尾词
+            let keyWords = [];
+            bpsoData.forEach(ele => {
+                keyWords.push(ele["KeyWords"]);
+            });
+            seoData.forEach(ele => {
+                keyWords = keyWords.concat(JSON.parse(ele["KeyLong"]));
+            });
+            // 去重
+            keyWords = [...new Set(keyWords)]
+
+            return keyWords;
         }
         else{
             return false;
         }
-    }
+    }   
 }
 
-module.exports = getNews
+module.exports = getKeyLong

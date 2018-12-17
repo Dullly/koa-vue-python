@@ -13,6 +13,7 @@ class getNews {
 
         // 如果是KeyName，则为单查询
         // 如果是KeyList，则为批量查询
+        // post的参数在request.body，get的参数在request.query
         if(ctx.request.query['KeyName'] || ctx.request.query['KeyList']){
             let KeyList;
             // 单查询，将keyName封装为数组

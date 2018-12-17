@@ -14,14 +14,14 @@ const $ajax = {
 			return err.message
 		}
 	},
-	async post(url, data) {
+	async post(api, data) {
+		console.log(api)
+		console.log(data)
 		try {
-			let res = await axios.post(url, {
-                params: data
-            })
+			let res = await axios.post("http://127.0.0.1:3002/python/"+api, data)
 			res = res.data
-			return new Promise((resolve, reject) => {
-                reject(res)
+			return new Promise((resolve) => {
+                resolve(res)
 			})
 		} catch (err) {
 			console.log(err)

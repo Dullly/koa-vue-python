@@ -23,6 +23,10 @@ app
 app.on("error", async (err,ctx)=>{//捕获异常记录错误日志
 	console.log(new Date(),":",err);
 });
+// post需要
+app.use(async ctx => {
+  ctx.body = ctx.request.body;
+});
 
 app.listen(3001, async () => {
 	console.log('Koa is listening in 3001')
