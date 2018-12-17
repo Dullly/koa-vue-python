@@ -304,11 +304,10 @@
 				// });
 				this.$ajax({
 					method: 'GET',
-					url: '/api/getKeyIndex',
+					url: '/python/getPageData',
                     dataType: 'json',
 					params: {
-						KeyList: JSON.stringify(["王者荣耀","星之守护"]),
-						num: 10
+						url:"https://egame.qq.com/497142175",
 					}
 				})
 				.then(function (response) {

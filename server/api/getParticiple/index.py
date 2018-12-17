@@ -40,9 +40,12 @@ def _participle(KeyList):
 
     return mainResult
 
-def _search(KeyList):
+def search(KeyList,isSet=True):
     res = _participle(KeyList)
-    res = list(set(res))
+    if isSet:
+        res = list(set(res))
+    else:
+        pass
     
     return res
 
@@ -51,5 +54,5 @@ def _search(KeyList):
 async def bpGetParticiple_root(request):
 	request = request.json
 	KeyList = json.loads(request["KeyList"])
-	res = _search(KeyList)
+	res = search(KeyList)
 	return sanjson(res)
