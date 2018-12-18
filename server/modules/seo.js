@@ -35,16 +35,23 @@ class SeoModel {
 	static async findBpsoKey (KeyList, islimit=true) {
 		var result;
 		if(islimit){
-			// let $sql = "select * from bpso where id in (select max(id) from bpso group by `KeyName`) ORDER BY DayPv DESC,MDayPv DESC,Price";
-			let $sql = "SELECT * FROM `bpso` AS `bpso` WHERE id in (select max(id) from bpso group by `KeyName`) AND `bpso`.`KeyName` IN (",
-				arrToStr;
+			// let $sql = "SELECT * FROM `bpso` AS `bpso` WHERE id in (select max(id) from bpso group by `KeyName`) AND `bpso`.`KeyName` IN (",
+			// 	arrToStr;
 			
-			KeyList.forEach(ele => {
-				arrToStr += "'"+ele+"'";
-			});
-			$sql += arrToStr + ") AND `bpso`.`KeyWords` IN(" + arrToStr +") ORDER BY DayPv DESC,MDayPv DESC,Price"
+			// KeyList.forEach(ele => {
+			// 	arrToStr += "'"+ele+"',";
+			// });
+			// $sql += arrToStr + ") AND `bpso`.`KeyWords` IN(" + arrToStr +") ORDER BY DayPv DESC,MDayPv DESC,Price"
 
-			result = await Seqeuelize.query($sql);
+			// console.log($sql)
+			// result = await Seqeuelize.query($sql);
+			
+			result = await bpsoDb.findAll({
+				where: {
+					KeyName: {[Op.in]: KeyList},
+					KeyWords: {[Op.in]: KeyList},
+				}
+			})
 		}else{
 			result = await bpsoDb.findAll({
 				where: {
