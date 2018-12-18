@@ -4,34 +4,23 @@ const router = new Router()
 
 
 /*
- * get请求
+ *
+ * POST请求,因为常常请求一大堆数据，get请求url长度有限制
+ * 因为sanic与koa在底层responese返回不一致，所以python请求与node请求分开
+ * 
  */
-// 新闻接口
-const getNews = require('./api/getNews/index')
-router.get('/api/getNews', getNews.find)
-
-// Qa接口
-const getQa = require('./api/getQa/index')
-router.get('/api/getQa', getQa.find)
-
 // 指数查询
 const getKeyIndex = require('./api/getKeyIndex/index')
-router.get('/api/getKeyIndex', getKeyIndex.find)
+router.post('/api/getKeyIndex', getKeyIndex.find)
+
+// 指数查询
+const getKeyWeight = require('./api/getKeyWeight/index')
+router.post('/api/getKeyWeight', getKeyWeight.find)
 
 // 长尾词查询
 const getKeyLong = require('./api/getKeyLong/index')
-router.get('/api/getKeyLong', getKeyLong.find)
+router.post('/api/getKeyLong', getKeyLong.find)
 
-// 获取页面信息
-const getPageData = require('./api/getPageData/index')
-router.get('/api/getPageData', getPageData.find)
 
-/*
- * post请求
- */
-// 分词查询
-// 因为文本转以后字符数据会很长，get请求有长度限制，这里请求使用Post
-const getParticiple = require('./api/getParticiple/index')
-router.post('/api/getParticiple', getParticiple.find)
 
 module.exports = router

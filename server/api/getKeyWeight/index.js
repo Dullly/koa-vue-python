@@ -1,6 +1,6 @@
 const main = require('./main')
 
-class getParticiple {
+class getKeyIndex {
     /**
      * 按关键词获取数据
      * @param ctx
@@ -11,11 +11,7 @@ class getParticiple {
             let result = await main.find(ctx)
             if(result){
                 ctx.response.status = 200;
-                ctx.body = {
-                    code: 200,
-                    msg: 'success',
-                    result: result,
-                }
+                ctx.body = result
             }
             else{
                 ctx.response.status = 412;
@@ -36,4 +32,4 @@ class getParticiple {
     }
 }
 
-module.exports = getParticiple
+module.exports = getKeyIndex

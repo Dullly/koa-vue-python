@@ -1,8 +1,11 @@
 import axios from 'axios'
+// axios 配置
+axios.defaults.timeout = 12000// 请求超时，适当修改
+
 const $ajax = {
 	async get(api, data) {
 		try {
-			let res = await axios.get("http://127.0.0.1:3002/python/"+api, {
+			let res = await axios.get(api, {
 				params: data
 			})
 			res = res.data
@@ -10,22 +13,20 @@ const $ajax = {
                 resolve(res)
 			})
 		} catch (err) {
-			console.log(err)
 			return err.message
 		}
 	},
 	async post(api, data) {
 		try {
-			let res = await axios.post("http://127.0.0.1:3002/python/"+api, data)
-			res = res.data
+			let res = await axios.post(api, data)
 			return new Promise((resolve) => {
+				res = res.data
                 resolve(res)
 			})
 		} catch (err) {
-			console.log(err)
 			return err.message
 		}
 	},
 }
 
-module.exports = $ajax
+export { $ajax }

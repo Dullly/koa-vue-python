@@ -7,9 +7,6 @@
 				<el-input placeholder="请输入url" prefix-icon="el-icon-search" v-model="url"></el-input>
 				<el-button type="primary" @click="search">立即分析</el-button>
 			</div>
-			<div class="search-state">
-				<p>aaaa</p>
-			</div>
 		</el-header>
 		<el-main>
 	
@@ -29,166 +26,43 @@
 				<div class="mod mod-data-page">
 					<h3 class="title">站内热词以及推荐内容</h3>
 					<div class="mod-cnt">
-						<p v-for="item in mainPageData" :key="item.id">
-							<b>{{item.key}}</b>
-							{{item.desc}}
-						</p>
+						<div class="data-page-info">
+							<b>标题：</b>
+							<p>{{mainPageData.title}}</p>
+						</div>
+						<div class="data-page-info">
+							<b>关键词：</b>
+							<p>{{mainPageData.keywords}}</p>
+						</div>
+						<div class="data-page-info">
+							<b>描述：</b>
+							<p>{{mainPageData.description}}</p>
+						</div>
+						<div class="data-page-info">
+							<b>关键词：</b>
+							<p>{{mainPageData.body}}</p>
+						</div>
 					</div>
 				</div>
 	
 				<div class="mod mod-data-page">
 					<h3 class="title">行业热词以及推荐内容</h3>
 					<div class="mod-cnt">
-						<p>魔法少女 星之守护者- 英雄联盟官方网站 - 腾讯游戏</p>
-						<p>在英雄联盟宇宙设定中瑞兹是最强的吗</p>
-						<p>谁知道王者荣耀这些符号怎么打？</p>
-						<p>王者荣耀 爱心字符 怎么打 如图</p>
-						<p>英雄联盟官网 上方的渐变黑是怎么做到的</p>
-						<p>玩英雄联盟卡怎么回事在线等。</p>
-						<p>堡垒之夜法塔里在哪里</p>
-						<p>wegame下载堡垒之夜说磁盘不足怎么办</p>
-						<p>英雄联盟不会出装。在网吧里有英雄联盟助手。可以...</p>
-						<p>LOL助手出现问题.打开Wg软件压根不显示LOL的任何信...</p>
-						<p>上海东方梦工厂文化传播有限公司怎么样？</p>
-						<p>上海东方梦工厂影视技术有限公司怎么样？</p>
-						<p>我的世界一周年村庄种子</p>
-						<p>求我的世界好的地图种子。</p>
-						<p>堡垒之夜为什么会出现这种问题</p>
-						<p>堡垒之夜登陆出现这个。怎么办?</p>
-						<p>王者荣耀:英雄百变大赛不看走保啦</p>
-						<p>王者荣耀:大神眼中上分最容易的英雄,不是李白,而是图5</p>
-						<p>感恩节送大礼,十大永久英雄任你选-王者荣耀官方网...</p>
-						<p>【超级赛事月】活动开启倒计时,最终豪礼勿忘兑换 -...</p>
-						<p>S8LOL总决赛电脑什么配置</p>
-						<p>英雄联盟theshyS8总决赛第二场玩的什么英雄</p>
-						<p>堡垒之夜手机版怎么进不去，要求都达到了</p>
-						<p>我问下堡垒之夜官网我的礼包在哪</p>
-						<p>做王者荣耀主播，那个直播平台好，就是那个平台多...</p>
-						<p>王者荣耀投屏直播 这图里的配置可以吗？？家里网速...</p>
-						<p>S8LOL总决赛电脑什么配置</p>
-						<p>lols8赛季奖励在哪领</p>
-						<p>vivo怎样下载堡垒之夜？</p>
-						<p>堡垒之夜手机版怎么进不去，要求都达到了</p>
-						<p>英雄联盟中国战队ig夺得得全球总冠军引全国网友沸...</p>
-						<p>LOL IG战队属于那个国家的?基地在哪里?听说都是韩...</p>
-						<p>王者荣耀里的CP英雄组团pk，哪组CP最为强势</p>
-						<p>王者荣耀：有很多隐藏的CP英雄你知道吗</p>
-						<p>王者荣耀时为什么总被团灭 来看看你的队友吧</p>
-						<p>这算是王者荣耀战歌mv吧</p>
-						<p>运营团队招聘专题-英雄联盟官方网站-腾讯游戏</p>
-						<p>掌上英雄联盟 - 英雄联盟官方网站 - 腾讯游戏</p>
-						<p>王者荣耀出了个什么新英雄</p>
-						<p>【王者荣耀】新英雄介绍:元歌</p>
-						<p>英雄联盟转区</p>
-						<p>英雄联盟转区维护到什么时候？</p>
-						<p>绝地求生延迟得厉害</p>
-						<p>绝地求生25battleye please perform a clean game ...</p>
-						<p>堡垒之夜手游体验服礼包哪里有 海量礼包等你拿</p>
-						<p>堡垒之夜手游标准皮肤怎么获得 标准服装获取介绍</p>
+						<p v-for="item in mainNewsLong">{{item}}</p>
 					</div>
 				</div>
 	
 				<div class="mod mod-data-page">
 					<h3 class="title">新闻热搜推荐内容</h3>
 					<div class="mod-cnt">
-						<p>魔法少女 星之守护者- 英雄联盟官方网站 - 腾讯游戏</p>
-						<p>在英雄联盟宇宙设定中瑞兹是最强的吗</p>
-						<p>谁知道王者荣耀这些符号怎么打？</p>
-						<p>王者荣耀 爱心字符 怎么打 如图</p>
-						<p>英雄联盟官网 上方的渐变黑是怎么做到的</p>
-						<p>玩英雄联盟卡怎么回事在线等。</p>
-						<p>堡垒之夜法塔里在哪里</p>
-						<p>wegame下载堡垒之夜说磁盘不足怎么办</p>
-						<p>英雄联盟不会出装。在网吧里有英雄联盟助手。可以...</p>
-						<p>LOL助手出现问题.打开Wg软件压根不显示LOL的任何信...</p>
-						<p>上海东方梦工厂文化传播有限公司怎么样？</p>
-						<p>上海东方梦工厂影视技术有限公司怎么样？</p>
-						<p>我的世界一周年村庄种子</p>
-						<p>求我的世界好的地图种子。</p>
-						<p>堡垒之夜为什么会出现这种问题</p>
-						<p>堡垒之夜登陆出现这个。怎么办?</p>
-						<p>王者荣耀:英雄百变大赛不看走保啦</p>
-						<p>王者荣耀:大神眼中上分最容易的英雄,不是李白,而是图5</p>
-						<p>感恩节送大礼,十大永久英雄任你选-王者荣耀官方网...</p>
-						<p>【超级赛事月】活动开启倒计时,最终豪礼勿忘兑换 -...</p>
-						<p>S8LOL总决赛电脑什么配置</p>
-						<p>英雄联盟theshyS8总决赛第二场玩的什么英雄</p>
-						<p>堡垒之夜手机版怎么进不去，要求都达到了</p>
-						<p>我问下堡垒之夜官网我的礼包在哪</p>
-						<p>做王者荣耀主播，那个直播平台好，就是那个平台多...</p>
-						<p>王者荣耀投屏直播 这图里的配置可以吗？？家里网速...</p>
-						<p>S8LOL总决赛电脑什么配置</p>
-						<p>lols8赛季奖励在哪领</p>
-						<p>vivo怎样下载堡垒之夜？</p>
-						<p>堡垒之夜手机版怎么进不去，要求都达到了</p>
-						<p>英雄联盟中国战队ig夺得得全球总冠军引全国网友沸...</p>
-						<p>LOL IG战队属于那个国家的?基地在哪里?听说都是韩...</p>
-						<p>王者荣耀里的CP英雄组团pk，哪组CP最为强势</p>
-						<p>王者荣耀：有很多隐藏的CP英雄你知道吗</p>
-						<p>王者荣耀时为什么总被团灭 来看看你的队友吧</p>
-						<p>这算是王者荣耀战歌mv吧</p>
-						<p>运营团队招聘专题-英雄联盟官方网站-腾讯游戏</p>
-						<p>掌上英雄联盟 - 英雄联盟官方网站 - 腾讯游戏</p>
-						<p>王者荣耀出了个什么新英雄</p>
-						<p>【王者荣耀】新英雄介绍:元歌</p>
-						<p>英雄联盟转区</p>
-						<p>英雄联盟转区维护到什么时候？</p>
-						<p>绝地求生延迟得厉害</p>
-						<p>绝地求生25battleye please perform a clean game ...</p>
-						<p>堡垒之夜手游体验服礼包哪里有 海量礼包等你拿</p>
-						<p>堡垒之夜手游标准皮肤怎么获得 标准服装获取介绍</p>
+						<p v-for="item in mainNews">{{item}}</p>
 					</div>
 				</div>
 	
 				<div class="mod mod-data-page">
 					<h3 class="title">热门问答推荐内容</h3>
 					<div class="mod-cnt">
-						<p>魔法少女 星之守护者- 英雄联盟官方网站 - 腾讯游戏</p>
-						<p>在英雄联盟宇宙设定中瑞兹是最强的吗</p>
-						<p>谁知道王者荣耀这些符号怎么打？</p>
-						<p>王者荣耀 爱心字符 怎么打 如图</p>
-						<p>英雄联盟官网 上方的渐变黑是怎么做到的</p>
-						<p>玩英雄联盟卡怎么回事在线等。</p>
-						<p>堡垒之夜法塔里在哪里</p>
-						<p>wegame下载堡垒之夜说磁盘不足怎么办</p>
-						<p>英雄联盟不会出装。在网吧里有英雄联盟助手。可以...</p>
-						<p>LOL助手出现问题.打开Wg软件压根不显示LOL的任何信...</p>
-						<p>上海东方梦工厂文化传播有限公司怎么样？</p>
-						<p>上海东方梦工厂影视技术有限公司怎么样？</p>
-						<p>我的世界一周年村庄种子</p>
-						<p>求我的世界好的地图种子。</p>
-						<p>堡垒之夜为什么会出现这种问题</p>
-						<p>堡垒之夜登陆出现这个。怎么办?</p>
-						<p>王者荣耀:英雄百变大赛不看走保啦</p>
-						<p>王者荣耀:大神眼中上分最容易的英雄,不是李白,而是图5</p>
-						<p>感恩节送大礼,十大永久英雄任你选-王者荣耀官方网...</p>
-						<p>【超级赛事月】活动开启倒计时,最终豪礼勿忘兑换 -...</p>
-						<p>S8LOL总决赛电脑什么配置</p>
-						<p>英雄联盟theshyS8总决赛第二场玩的什么英雄</p>
-						<p>堡垒之夜手机版怎么进不去，要求都达到了</p>
-						<p>我问下堡垒之夜官网我的礼包在哪</p>
-						<p>做王者荣耀主播，那个直播平台好，就是那个平台多...</p>
-						<p>王者荣耀投屏直播 这图里的配置可以吗？？家里网速...</p>
-						<p>S8LOL总决赛电脑什么配置</p>
-						<p>lols8赛季奖励在哪领</p>
-						<p>vivo怎样下载堡垒之夜？</p>
-						<p>堡垒之夜手机版怎么进不去，要求都达到了</p>
-						<p>英雄联盟中国战队ig夺得得全球总冠军引全国网友沸...</p>
-						<p>LOL IG战队属于那个国家的?基地在哪里?听说都是韩...</p>
-						<p>王者荣耀里的CP英雄组团pk，哪组CP最为强势</p>
-						<p>王者荣耀：有很多隐藏的CP英雄你知道吗</p>
-						<p>王者荣耀时为什么总被团灭 来看看你的队友吧</p>
-						<p>这算是王者荣耀战歌mv吧</p>
-						<p>运营团队招聘专题-英雄联盟官方网站-腾讯游戏</p>
-						<p>掌上英雄联盟 - 英雄联盟官方网站 - 腾讯游戏</p>
-						<p>王者荣耀出了个什么新英雄</p>
-						<p>【王者荣耀】新英雄介绍:元歌</p>
-						<p>英雄联盟转区</p>
-						<p>英雄联盟转区维护到什么时候？</p>
-						<p>绝地求生延迟得厉害</p>
-						<p>绝地求生25battleye please perform a clean game ...</p>
-						<p>堡垒之夜手游体验服礼包哪里有 海量礼包等你拿</p>
-						<p>堡垒之夜手游标准皮肤怎么获得 标准服装获取介绍</p>
+						<p v-for="item in mainQaLong">{{item}}</p>
 					</div>
 				</div>
 	
@@ -198,27 +72,175 @@
 </template>
 
 <script>
-	// import common from '@/../server/common'
-	// import utils from '@/utils/index'
+	import { $ajax } from '../../common/js/axios'
 	
 	export default {
 		data() {
 			const _this = this
 			return {
-				url:"https://egame.qq.com/5967374",
 				dataKey: [
 					["王者荣耀", "绝地求生大逃杀", "堡垒之夜官网", "英雄杀官方网", "英雄联盟", "手游模拟器", "我的世界论坛", "梦工厂"],
 					["114426", "1862", "803", 0, "72447", "1135", "324", "564"],
 					[114, 86, 85, 91, 236, 100, 103, 106],
 					[64.357, 39.716, 39.576, 38.625, 38.612, 37.784, 37.206, 36.891]
 				],
-				dataKeyIndex: [],
-				mainPageData: [],
+				dataKeyIndex: [],	//最后展示时使用
+				mainKeyLong: [],	//长尾词
+
+				url: "https://egame.qq.com/5967374",	//待查询的url
+				mainPageData: [],	//站内热门信息
+				mainKeyWords: [],	//核心关键词
+				mainNews: [],		//核心词查出来的新闻
+				mainNewsLong: [],	//长尾词查出来的新闻
+				mainQaLong: [],		//长尾词查出来的问答
 	
 			}
 		},
 		
 		methods: {
+			/**
+			 * 处理逻辑
+			 *  */
+			// 点击立即分析，启动任务
+			async search(){
+
+				/** 
+				 * 第一步，获取到站内内容
+				*/
+				// 请求getPageData接口
+				let resPageData = await $ajax.post("/python/getPageData", {
+					url: this.url,
+				})
+				// 主内容处理
+				this.getMainPageData(resPageData)
+
+				/** 
+				 * 第二步，获取body中指数最高的5个关键词
+				*/
+				let resKeyIndex = await $ajax.post("/api/getKeyIndex", {
+					KeyList: JSON.stringify(resPageData.body),
+				})
+				let _mainkeywords = this.getKeyIndex(resKeyIndex)
+
+				/** 
+				 * 第三步，获取核心关键词长尾词
+				*/
+				this.mainKeyLong = await $ajax.post("/api/getKeyLong", {
+					KeyList: JSON.stringify(_mainkeywords),
+				})
+				// 获取核心词新闻
+				this.mainNews = await $ajax.post("/python/getNews", {
+					KeyList: JSON.stringify(_mainkeywords),
+					num: 10
+				})
+
+				/** 
+				 * 第四步，长尾词分词
+				*/
+				// 分词
+				this.mainKeyLong = await $ajax.post("/python/getParticiple", {
+					KeyList: JSON.stringify(this.mainKeyLong),
+				})
+				// 查热度
+				this.mainKeyLong = await $ajax.post("/api/getKeyIndex", {
+					KeyList: JSON.stringify(this.mainKeyLong),
+				})
+				this.getKeyIndexLong(this.mainKeyLong)
+				
+				// 长尾词新闻
+				this.mainNewsLong = await $ajax.post("/python/getNews", {
+					KeyList: JSON.stringify(this.mainKeyLong ),
+					num: 2
+				})
+				// 长尾词问答
+				this.mainQaLong = await $ajax.post("/python/getQa", {
+					KeyList: JSON.stringify(this.mainKeyLong ),
+					num: 2
+				})
+				
+				this.getMainKeyIndex();
+
+			},
+			// 第一步，获取到站内内容
+			getMainPageData:function(res){
+				this.mainPageData = res;
+
+				// 放入核心关键词里
+				this.mainKeyWords = res.top.reduce(function(coll,item){
+					coll.push(item);
+					return coll;
+				},this.mainKeyWords)
+
+				// Tips
+				this.$message({
+					message: '页面主内容获取成功！',
+					type: 'success',
+					duration: 1000
+				});
+				
+			},
+			// 查询指数
+			getKeyIndex:function(res){
+				//按DavPv、MDayPv、Price依次排序
+				res = this.sortData(res)
+				// 截取前5个
+				res = res.slice(0,5);
+
+				// 放入核心关键词里
+				this.mainKeyWords = res.reduce(function(coll,item){
+					coll.push( item["KeyName"] );
+					return coll;
+				},this.mainKeyWords)
+
+				return this.mainKeyWords;
+					
+			},
+			getKeyIndexLong:function(res){
+				//按DavPv、MDayPv、Price依次排序
+				res = this.sortData(res)
+				// 截取前20个
+				res = res.slice(0,20);
+
+				let keylist = [];
+				res.forEach(ele=>{
+					keylist.push(ele["KeyName"])
+				})
+				this.mainKeyLong = keylist;
+			},
+			getMainKeyIndex:function(){
+
+			},
+			/**
+			 * 一些辅助方法
+			 *  */
+			// 提示刷新弹框
+			errorTips:function(msg="请刷新重试！"){
+				this.$alert( msg, '错误', {
+					confirmButtonText: '确定',
+				});
+			},
+			// 最后一行高亮
+			tableRowClassName({row, rowIndex}) {
+				if (rowIndex === 0) {
+					return 'table-top';
+				} else if (rowIndex === 3) {
+					return 'table-bottom';
+				}
+				return '';
+			},
+			// 首先按照DayPv排序，其次按照MDayPv排序，最后按照Price排序，
+			sortData:function(arr){
+				let newArr = arr.sort(function(a,b){
+					if(a.DayPv === b.DayPv){
+						if(b.MDayPv === a.MDayPv){
+							return a.Price - b.Price;
+						}
+						return b.MDayPv - a.MDayPv;
+					}
+					return b.DayPv - a.DayPv;
+				})
+				return newArr;
+			},
 			// 将后台返回后的数据重新处理，便于在前端显示
 			filterDataKey() {
 				var _tmpDataKey = [],
@@ -240,95 +262,12 @@
 				}
 				this.dataKey = _tmpDataKey;
 			},
-			// 最后一行高亮
-			tableRowClassName({row, rowIndex}) {
-				if (rowIndex === 0) {
-					return 'table-top';
-				} else if (rowIndex === 3) {
-					return 'table-bottom';
-				}
-				return '';
-			},
-			// 点击立即分析，启动任务
-			search:function(){
-				this.$ajax({
-					method: 'GET',
-					url: "/api/getPageData",
-                    dataType: 'json',
-					params: {
-						url: this.url,
-					}
-				})
-				.then((res)=>{
-					console.log(res)
-					this.getMainPageData(res)
-				})
-				.catch(function (error) {
-					console.log(error)
-				})
-			},
-			// 第一步，获取到站内内容
-			getMainPageData:function(res){
-				// 请求成功
-				if(res.status == 200){
-					res = res.data;
-					
-					this.mainPageData.push(
-						{
-							"key":"标题",
-							"desc": res.title
-						},
-						{
-							"key":"关键词",
-							"desc": res.keywords
-						},
-						{
-							"key":"描述",
-							"desc": res.description
-						},
-						{
-							"key":"正文关",
-							"desc": res.body
-						}
-					)
-					console.log(this.mainPageData)
-				}
-			},
-			getData() {
-				// this.$ajax({
-				// 	method: 'GET',
-				// 	url: '/python/getPageData',
-                //     dataType: 'json',
-				// 	params: {
-				// 		url:"https://egame.qq.com/497142175",
-				// 	}
-				// })
-				// .then(function (response) {
-				// 	console.log(response)
-				// })
-				// .catch(function (error) {
-				// 	console.log(error)
-				// })
-				this.$ajax({
-					method: 'POST',
-					url: '/api/getParticiple',
-                    dataType: 'json',
-					data: {
-						KeyList: JSON.stringify(["魔法少女 星之守护者- 英雄联盟官方网站 - 腾讯游戏","上海东方梦工厂影视技术有限公司怎么样？"]),
-					}
-				})
-				.then(function (response) {
-					console.log(response)
-				})
-				.catch(function (error) {
-					console.log(error)
-				})
-			}
+			
 
 		},
 		mounted() {
-			// this.filterDataKey();
-			// this.getData();
+			
+			this.search()
 		},
 		
 	}
@@ -350,13 +289,6 @@
 			.el-button {
 				margin-left: 10px;
 			}
-		}
-		.search-state {
-			width: 598px;
-			margin-top: 10px;
-			margin-left: auto;
-			margin-right: auto;
-			color: rgba(255, 255, 255, .8);
 		}
 		// 主体部分
 		.el-main {
@@ -415,6 +347,11 @@
 			overflow: scroll;
 			p {
 				margin-bottom: 10px;
+			}
+		}
+		.data-page-info{
+			b{
+				font-size: 14px;
 			}
 		}
 	}

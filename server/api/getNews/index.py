@@ -68,7 +68,7 @@ def _search(longKeyList,limitNum):
 	threadList = []
 	thrs = []
 	# 多线程无法开太多，为了速度只能分组处理
-	tmpLongKeysStep = 3  # 每组3个关键词
+	tmpLongKeysStep = 6  # 每组3个关键词
 	tmpLongKeys = [longKeyList[i:i+tmpLongKeysStep]for i in range(0, len(longKeyList), tmpLongKeysStep)]
 
 	for index in range(len(tmpLongKeys)):
@@ -82,28 +82,17 @@ def _search(longKeyList,limitNum):
 	return NEWS
 
 # 做一层code中转，这样前端可以直接调python接口，不用经过Node层，直接拿到数据
-def main(KeyList,num):
-	try:
-		news = _search(KeyList,num)
-		result = {
-			"code": 200,
-			"msg": "success",
-			"result": news
-		}
-	except:
-		result = {
-			"code": 412,
-			"msg": "爬虫错误",
-		}
-	return result
+def search(KeyList,num):
+
+	return _search(KeyList,num)
 
 # 后台route
-@bpGetNews.route('/python/getNews')
+@bpGetNews.route('/python/getNews',methods=['POST'])
 async def bpGetNews_root(request):
 	# 分解参数
-	request = request.args
-	KeyList = json.loads(request["KeyList"][0])
-	num = int(request["num"][0])
-	result = main(KeyList,num)
+	request = request.json
+	KeyList = json.loads(request["KeyList"])
+	num = int(request["num"])
+	result = search(KeyList,num)
 	
 	return sanjson(result)

@@ -11,13 +11,13 @@ class getKeyLong {
         var result;
 
         // 如果是KeyName，则为单查询
-        if(ctx.request.query['KeyName']){
+        if(ctx.request.body['KeyName']){
             // 逻辑暂时没写
             return false;
         }
         // 如果是KeyList，则为批量查询
-        else if(ctx.request.query['KeyList']){
-            let KeyList = ctx.request.query['KeyList'];
+        else if(ctx.request.body['KeyList']){
+            let KeyList = ctx.request.body['KeyList'];
             KeyList = JSON.parse(KeyList);
             
             // 查询百度竞价相关信息，拿到关键词数组信息

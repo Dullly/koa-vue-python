@@ -39,7 +39,7 @@ def _GetPageInfo(url):
 	description = html.xpath('/html/head/meta[@name="description"]/@content')
 	keywords = html.xpath('/html/head/meta[@name="keywords"]/@content')
 
-	# 分词
+	# 分词，为计算出现词频，此处不去重。
 	p = getParticiple.search(p, False)
 	keywords = getParticiple.search(keywords, False)
 	description = getParticiple.search(description, False)
@@ -90,11 +90,11 @@ def search(url):
 	return _GetPageInfo(url)
 
 # 后台route
-@bpGetPageData.route('/python/getPageData')
+@bpGetPageData.route('/python/getPageData',methods=['POST'])
 async def bpGetPageData_root(request):
 	# 分解参数
-	request = request.args
-	url = request["url"][0]
+	request = request.json
+	url = request["url"]
 	result = search(url)
-	
+
 	return sanjson(result)

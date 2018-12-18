@@ -13,7 +13,7 @@ class getKeyIndex {
         if(ctx.request.body['KeyName']){
             let KeyName = ctx.request.body['KeyName'];
             // 单查询
-            result = await SeoModel.SfindBpsoKey(KeyName);
+            result = await SeoModel.SfindSeoKey(KeyName);
             return result;
         }
         // 如果是KeyList，则为批量查询
@@ -21,7 +21,7 @@ class getKeyIndex {
             let KeyList = ctx.request.body['KeyList'];
             KeyList = JSON.parse(KeyList);
             // 多查询
-            result = await SeoModel.MfindBpsoKey(KeyList);
+            result = await SeoModel.MfindSeoKey(KeyList);
             return result;
         }
         else{

@@ -11,11 +11,7 @@ class getKeyIndex {
             let result = await main.find(ctx)
             if(result){
                 ctx.response.status = 200;
-                ctx.body = {
-                    code: 200,
-                    msg: 'success',
-                    result: result,
-                }
+                ctx.body = result
             }
             else{
                 ctx.response.status = 412;

@@ -24,14 +24,14 @@ Global_Heads = {
 	'User-Agent': 'Mozilla/6.1 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
 }
 
-
 # 引入多线程脚本
 from ..Global.python.lib import threadClass
 
 # 搜索热门问题
 def _SingleGetQa(key,limitNum):
 
-	url = 'https://zhidao.baidu.com/search?word='+key+'&lm=0&site=-1&sites=0&date=3'
+	# url = 'https://zhidao.baidu.com/search?word='++'&lm=0&site=-1&sites=0&date=3'
+	url = 'https://zhidao.baidu.com/search?lm=0&rn=10&pn=0&fr=search&ie=gbk&word=' + key
 	res = requests.get(url, headers=Global_Heads, verify=False, timeout=10)
 	res.encoding = 'utf-8'
 	# 根节点
@@ -68,7 +68,7 @@ def _search(longKeyList,limitNum):
 	threadList = []
 	thrs = []
 	# 多线程无法开太多，为了速度只能分组处理
-	tmpLongKeysStep = 3  # 每组3个关键词
+	tmpLongKeysStep = 6  # 每组3个关键词
 	tmpLongKeys = [longKeyList[i:i+tmpLongKeysStep]for i in range(0, len(longKeyList), tmpLongKeysStep)]
 
 	for index in range(len(tmpLongKeys)):
@@ -83,27 +83,18 @@ def _search(longKeyList,limitNum):
 	return NEWS
 
 # 做一层code中转，这样前端可以直接调python接口，不用经过Node层，直接拿到数据
-def main(KeyList,num):
-	try:
-		news = _search(KeyList,num)
-		result = {
-			"code": 200,
-			"msg": "success",
-			"result": news
-		}
-	except:
-		result = {
-			"code": 412,
-			"msg": "爬虫错误",
-		}
-	return result
+def search(KeyList,num):
 
-@bpGetQa.route('/python/getQa')
+	return _search(KeyList,num)
+
+@bpGetQa.route('/python/getQa',methods=['POST'])
 async def bpGetQa_root(request):
-	request = request.args
-	KeyList = json.loads(request["KeyList"][0])
-	num = int(request["num"][0])
-	
-	result = main(KeyList,num)
+	request = request.json
+	KeyList = json.loads(request["KeyList"])
+	num = int(request["num"])
+	print("============")
+	print(KeyList)
+	print("============")
+	result = search(KeyList,num)
 	
 	return sanjson(result)
