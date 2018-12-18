@@ -33,15 +33,16 @@ def _GetPageInfo(url):
 	res.encoding = 'utf-8'
 	# 根节点
 	html = etree.HTML(res.content)
+	# 页面信息
 	title = html.xpath('//title/text()')
 	p = html.xpath('//body//*/text()')
-
 	description = html.xpath('/html/head/meta[@name="description"]/@content')
 	keywords = html.xpath('/html/head/meta[@name="keywords"]/@content')
 
-	p = getParticiple.search(p)
-	keywords = getParticiple.search(keywords)
-	description = getParticiple.search(description)
+	# 分词
+	p = getParticiple.search(p, False)
+	keywords = getParticiple.search(keywords, False)
+	description = getParticiple.search(description, False)
 
 	bodyStr = p + description + keywords
 
