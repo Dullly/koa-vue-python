@@ -118,7 +118,7 @@
 				 * 第二步，获取body中指数最高的5个关键词
 				*/
 				let resKeyIndex = await $ajax.post("/api/getKeyIndex", {
-					KeyList: JSON.stringify(resPageData.body),
+					KeyList: resPageData.body,
 				})
 				let _mainkeywords = this.getKeyIndex(resKeyIndex)
 
@@ -126,11 +126,11 @@
 				 * 第三步，获取核心关键词长尾词
 				*/
 				this.mainKeyLong = await $ajax.post("/api/getKeyLong", {
-					KeyList: JSON.stringify(_mainkeywords),
+					KeyList: _mainkeywords,
 				})
 				// 获取核心词新闻
 				this.mainNews = await $ajax.post("/python/getNews", {
-					KeyList: JSON.stringify(_mainkeywords),
+					KeyList: _mainkeywords,
 					num: 10
 				})
 
@@ -139,22 +139,22 @@
 				*/
 				// 分词
 				this.mainKeyLong = await $ajax.post("/python/getParticiple", {
-					KeyList: JSON.stringify(this.mainKeyLong),
+					KeyList: this.mainKeyLong,
 				})
 				// 查热度
 				this.mainKeyLong = await $ajax.post("/api/getKeyIndex", {
-					KeyList: JSON.stringify(this.mainKeyLong),
+					KeyList: this.mainKeyLong,
 				})
 				this.getKeyIndexLong(this.mainKeyLong)
 				
 				// 长尾词新闻
 				this.mainNewsLong = await $ajax.post("/python/getNews", {
-					KeyList: JSON.stringify(this.mainKeyLong ),
+					KeyList: this.mainKeyLong ,
 					num: 2
 				})
 				// 长尾词问答
 				this.mainQaLong = await $ajax.post("/python/getQa", {
-					KeyList: JSON.stringify(this.mainKeyLong ),
+					KeyList: this.mainKeyLong ,
 					num: 2
 				})
 				

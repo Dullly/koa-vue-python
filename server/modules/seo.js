@@ -19,20 +19,7 @@ class SeoModel {
 	 * @param KeyName  关键词
 	 * @returns {Promise.<*>}
 	 */
-	static async SfindSeoKey (keyName) {
-		const result = await seoDb.findAll({
-			where: {
-				KeyName: keyName
-			}
-		})
-		return result
-	}
-	/**
-	 * 单查询，seo的相关信息
-	 * @param KeyName  关键词
-	 * @returns {Promise.<*>}
-	 */
-	static async MfindSeoKey (KeyLists) {
+	static async findSeoKey (KeyLists) {
 		const result = await seoDb.findAll({
 			where: {
 				KeyName: {[Op.in]: KeyLists},
@@ -41,42 +28,23 @@ class SeoModel {
 		return result
 	}
 	/**
-	 * 查询百度竞价信息，单查询
-	 * @param KeyName  关键词
-	 * @returns {Promise.<*>}
-	 */
-	static async SfindBpsoKey (keyName, islimit=true) {
-		var result;
-		if(islimit){
-			result = await bpsoDb.findAll({
-				where: {
-					KeyName: keyName,
-					KeyWords: keyName
-				}
-			})
-		}else{
-			result = await bpsoDb.findAll({
-				where: {
-					KeyName: keyName,
-				}
-			})
-		}
-		return result
-	}
-	/**
 	 * 查询百度竞价信息，多查询
 	 * @param KeyList  关键词数组
 	 * @returns {Promise.<*>}
 	 */
-	static async MfindBpsoKey (KeyList, islimit=true) {
+	static async findBpsoKey (KeyList, islimit=true) {
 		var result;
 		if(islimit){
-			result = await bpsoDb.findAll({
-				where: {
-					KeyName: {[Op.in]: KeyList},
-					KeyWords: {[Op.in]: KeyList},
-				}
-			})
+			// let $sql = "select * from bpso where id in (select max(id) from bpso group by `KeyName`) ORDER BY DayPv DESC,MDayPv DESC,Price";
+			let $sql = "SELECT * FROM `bpso` AS `bpso` WHERE id in (select max(id) from bpso group by `KeyName`) AND `bpso`.`KeyName` IN (",
+				arrToStr;
+			
+			KeyList.forEach(ele => {
+				arrToStr += "'"+ele+"'";
+			});
+			$sql += arrToStr + ") AND `bpso`.`KeyWords` IN(" + arrToStr +") ORDER BY DayPv DESC,MDayPv DESC,Price"
+
+			result = await Seqeuelize.query($sql);
 		}else{
 			result = await bpsoDb.findAll({
 				where: {

@@ -90,11 +90,8 @@ def search(KeyList,num):
 @bpGetQa.route('/python/getQa',methods=['POST'])
 async def bpGetQa_root(request):
 	request = request.json
-	KeyList = json.loads(request["KeyList"])
+	KeyList = request["KeyList"]
 	num = int(request["num"])
-	print("============")
-	print(KeyList)
-	print("============")
 	result = search(KeyList,num)
 	
 	return sanjson(result)

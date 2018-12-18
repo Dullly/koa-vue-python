@@ -16,43 +16,43 @@ import jieba.posseg as pseg
 # 自定义词典
 jieba.load_userdict(os.getcwd() + "/server/api/Global/python/dict/userdict.txt")
 def stopwordslist(filepath):
-    stopwords = [line.strip() for line in open(filepath, 'r', encoding='utf-8').readlines()]
-    return stopwords
+	stopwords = [line.strip() for line in open(filepath, 'r', encoding='utf-8').readlines()]
+	return stopwords
 stopwords = stopwordslist(os.getcwd() + "/server/api/Global/python/dict/stopwords.txt")
 
 def _participleKey(key):
-    res = pseg.lcut(key)
-    result = []
-    for item in res:
-        if item.word not in stopwords and item.flag in ["x","n"] and len(item.word)>1:
-            result.append(item.word)
-    return result
-    # return ["a"]
+	res = pseg.lcut(key)
+	result = []
+	for item in res:
+		if item.word not in stopwords and item.flag in ["x","n"] and len(item.word)>1:
+			result.append(item.word)
+	return result
+	# return ["a"]
 
 def _participle(KeyList):
-    mainResult = []
-    # 如果是数组
-    if isinstance(KeyList,list):
-        for item in KeyList:
-            mainResult += _participleKey(item)
-    elif isinstance(KeyList,str):
-        mainResult += _participleKey(item)
+	mainResult = []
+	# 如果是数组
+	if isinstance(KeyList,list):
+		for item in KeyList:
+			mainResult += _participleKey(item)
+	elif isinstance(KeyList,str):
+		mainResult += _participleKey(item)
 
-    return mainResult
+	return mainResult
 
 def search(KeyList,isSet=True):
-    res = _participle(KeyList)
-    if isSet:
-        res = list(set(res))
-    else:
-        pass
-    
-    return res
+	res = _participle(KeyList)
+	if isSet:
+		res = list(set(res))
+	else:
+		pass
+		
+	return res
 
 
 @bpGetParticiple.route('/python/getParticiple',methods=['POST'])
 async def bpGetParticiple_root(request):
 	request = request.json
-	KeyList = json.loads(request["KeyList"])
+	KeyList = request["KeyList"]
 	res = search(KeyList)
 	return sanjson(res)

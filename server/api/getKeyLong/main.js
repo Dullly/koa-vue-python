@@ -8,35 +8,38 @@ class getKeyLong {
      * @returns {Promise.<void>}
      */
     static async find(ctx) {
-        var result;
+        var result = [];
 
         // 如果是KeyName，则为单查询
-        if(ctx.request.body['KeyName']){
-            // 逻辑暂时没写
-            return false;
-        }
         // 如果是KeyList，则为批量查询
-        else if(ctx.request.body['KeyList']){
-            let KeyList = ctx.request.body['KeyList'];
-            KeyList = JSON.parse(KeyList);
+        // post的参数在request.body，get的参数在request.query
+        if(ctx.request.body['KeyName'] || ctx.request.body['KeyList']){
+            let KeyList;
+            // 单查询，将keyName封装为数组
+			if(ctx.request.body['KeyName']){
+				KeyList = [ctx.request.body['KeyName']];
+            }
+            // 多查询
+			else{
+				KeyList = ctx.request.body['KeyList'];
+            }
             
             // 查询百度竞价相关信息，拿到关键词数组信息
-            let bpsoData = await SeoModel.MfindBpsoKey(KeyList,false);
+            let bpsoData = await SeoModel.findBpsoKey(KeyList,false);
             // 查询百度竞价相关信息，拿到关键词数组信息
-            let seoData = await SeoModel.MfindSeoKey(KeyList);
+            let seoData = await SeoModel.findSeoKey(KeyList);
             
-            // 取长尾词
-            let keyWords = [];
+            
             bpsoData.forEach(ele => {
-                keyWords.push(ele["KeyWords"]);
+                result.push(ele["KeyWords"]);
             });
             seoData.forEach(ele => {
-                keyWords = keyWords.concat(JSON.parse(ele["KeyLong"]));
+                result = result.concat(JSON.parse(ele["KeyLong"]));
             });
             // 去重
-            keyWords = [...new Set(keyWords)]
+            result = [...new Set(result)]
 
-            return keyWords;
+            return result;
         }
         else{
             return false;

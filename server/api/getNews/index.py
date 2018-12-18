@@ -91,7 +91,7 @@ def search(KeyList,num):
 async def bpGetNews_root(request):
 	# 分解参数
 	request = request.json
-	KeyList = json.loads(request["KeyList"])
+	KeyList = request["KeyList"]
 	num = int(request["num"])
 	result = search(KeyList,num)
 	
